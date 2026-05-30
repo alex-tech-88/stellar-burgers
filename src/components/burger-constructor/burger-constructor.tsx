@@ -6,20 +6,33 @@ import {
   selectConstructorItems,
   clearConstructor
 } from '../../services/slices/constructorSlice';
+import {
+  createOrder,
+  clearOrderModal,
+  selectOrderRequest,
+  selectOrderModalData
+} from '../../services/slices/orderSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useAppDispatch();
   const constructorItems = useAppSelector(selectConstructorItems);
-
-  const orderRequest = false;
-  const orderModalData = null;
+  const orderRequest = useAppSelector(selectOrderRequest);
+  const orderModalData = useAppSelector(selectOrderModalData);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    // TODO: dispatch оформления заказа
+
+    const ids = [
+      constructorItems.bun._id,
+      ...constructorItems.ingredients.map((i) => i._id),
+      constructorItems.bun._id
+    ];
+
+    dispatch(createOrder(ids));
   };
 
   const closeOrderModal = () => {
+    dispatch(clearOrderModal());
     dispatch(clearConstructor());
   };
 

@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import '../../index.css';
 import styles from './app.module.css';
 
@@ -22,24 +23,33 @@ import {
   ResetPassword
 } from '@pages';
 
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
+import {
+  fetchUser,
+  selectIsAuthChecked
+} from '../../services/slices/userSlice';
+
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const isAuthChecked = useAppSelector(selectIsAuthChecked);
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, []);
 
   const background = location.state && location.state.background;
+  const handleModalClose = () => navigate(-1);
 
-  const handleModalClose = () => {
-    navigate(-1);
-  };
+  if (!isAuthChecked) return null;
 
   return (
     <div className={styles.app}>
       <AppHeader />
-
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
-
         <Route
           path='/login'
           element={
@@ -48,7 +58,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path='/register'
           element={
@@ -57,7 +66,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path='/forgot-password'
           element={
@@ -66,7 +74,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path='/reset-password'
           element={
@@ -75,7 +82,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path='/profile'
           element={
@@ -84,7 +90,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route
           path='/profile/orders'
           element={
@@ -93,10 +98,8 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route path='/feed/:number' element={<OrderInfo />} />
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
-
         <Route
           path='/profile/orders/:number'
           element={
@@ -105,7 +108,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -119,7 +121,6 @@ const App = () => {
               </Modal>
             }
           />
-
           <Route
             path='/ingredients/:id'
             element={
@@ -128,7 +129,6 @@ const App = () => {
               </Modal>
             }
           />
-
           <Route
             path='/profile/orders/:number'
             element={
