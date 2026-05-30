@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
@@ -12,15 +13,23 @@ import {
   selectOrderRequest,
   selectOrderModalData
 } from '../../services/slices/orderSlice';
+import { selectIsAuth } from '../../services/slices/userSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const constructorItems = useAppSelector(selectConstructorItems);
   const orderRequest = useAppSelector(selectOrderRequest);
   const orderModalData = useAppSelector(selectOrderModalData);
+  const isAuth = useAppSelector(selectIsAuth);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+
+    if (!isAuth) {
+      navigate('/login');
+      return;
+    }
 
     const ids = [
       constructorItems.bun._id,

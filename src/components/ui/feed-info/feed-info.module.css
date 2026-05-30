@@ -17,6 +17,7 @@
   flex-wrap: wrap;
   max-height: 180px;
   overflow: hidden;
+  column-gap: var(--space-8);
 }
 
 .title {
