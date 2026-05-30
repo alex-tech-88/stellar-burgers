@@ -1,21 +1,20 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient } from '@utils-types';
+import { TIngredient, TOrder } from '@utils-types';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { selectIngredients } from '../../services/slices/ingredientsSlice';
 import { selectOrders } from '../../services/slices/feedSlice';
 import { selectProfileOrders } from '../../services/slices/profileOrdersSlice';
 import { getOrderByNumberApi } from '@api';
-import { useState } from 'react';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
   const ingredients = useAppSelector(selectIngredients);
   const feedOrders = useAppSelector(selectOrders);
   const profileOrders = useAppSelector(selectProfileOrders);
-  const [orderData, setOrderData] = useState<any>(null);
+  const [orderData, setOrderData] = useState<TOrder | null>(null);
 
   useEffect(() => {
     if (!number) return;

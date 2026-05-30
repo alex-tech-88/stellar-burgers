@@ -112,7 +112,7 @@ const App = () => {
       </Routes>
 
       {background && (
-        <Routes>
+        <Routes location={location}>
           <Route
             path='/feed/:number'
             element={
