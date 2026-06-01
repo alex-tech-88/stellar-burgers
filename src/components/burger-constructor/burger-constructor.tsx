@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
-import {
-  selectConstructorItems,
-  clearConstructor
-} from '../../services/slices/constructorSlice';
+import { selectConstructorItems } from '../../services/slices/constructorSlice';
 import {
   createOrder,
   clearOrderModal,
@@ -42,7 +39,6 @@ export const BurgerConstructor: FC = () => {
 
   const closeOrderModal = () => {
     dispatch(clearOrderModal());
-    dispatch(clearConstructor());
   };
 
   const price = useMemo(

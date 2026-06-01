@@ -1,32 +1,40 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
-import { TIngredient, TOrder } from '@utils-types';
+import { TIngredient } from '@utils-types';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { selectIngredients } from '../../services/slices/ingredientsSlice';
 import { selectOrders } from '../../services/slices/feedSlice';
 import { selectProfileOrders } from '../../services/slices/profileOrdersSlice';
-import { getOrderByNumberApi } from '@api';
+import {
+  fetchOrderByNumber,
+  selectCurrentOrder
+} from '../../services/slices/orderSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams<{ number: string }>();
+  const dispatch = useAppDispatch();
   const ingredients = useAppSelector(selectIngredients);
   const feedOrders = useAppSelector(selectOrders);
   const profileOrders = useAppSelector(selectProfileOrders);
-  const [orderData, setOrderData] = useState<TOrder | null>(null);
+  const currentOrder = useAppSelector(selectCurrentOrder);
+
+  const orderData = useMemo(
+    () =>
+      [...feedOrders, ...profileOrders].find(
+        (o) => o.number === Number(number)
+      ) ?? currentOrder,
+    [feedOrders, profileOrders, currentOrder, number]
+  );
 
   useEffect(() => {
     if (!number) return;
     const found = [...feedOrders, ...profileOrders].find(
       (o) => o.number === Number(number)
     );
-    if (found) {
-      setOrderData(found);
-    } else {
-      getOrderByNumberApi(Number(number)).then((data) => {
-        setOrderData(data.orders[0]);
-      });
+    if (!found) {
+      dispatch(fetchOrderByNumber(Number(number)));
     }
   }, [number]);
 
