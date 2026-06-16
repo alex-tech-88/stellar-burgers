@@ -17,7 +17,7 @@ module.exports = {
     '^@slices$': '<rootDir>/src/services/slices',
     '^@selectors$': '<rootDir>/src/services/selectors'
   },
-  setupFilesAfterFramework: ['@testing-library/jest-dom'],
+  setupFilesAfterEach: ['@testing-library/jest-dom'],
   collectCoverage: false,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8'
