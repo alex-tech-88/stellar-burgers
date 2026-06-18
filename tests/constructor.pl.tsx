@@ -5,7 +5,7 @@ const HAR_FILE = path.join(__dirname, 'hars/mock.json');
 
 async function setupPage(page: Page) {
   await page.routeFromHAR(HAR_FILE, {
-    url: 'https://norma.nomoreparties.space/**',
+    url: 'https://norma.education-services.ru/**',
     notFound: 'abort'
   });
   await page.goto('/');
@@ -102,17 +102,13 @@ test.describe('Order creation', () => {
       }
     ]);
     await page.routeFromHAR(HAR_FILE, {
-      url: 'https://norma.nomoreparties.space/**',
+      url: 'https://norma.education-services.ru/**',
       notFound: 'abort'
     });
     await page.goto('/');
-    await page.waitForSelector('[data-testid="ingredient-item"]');
 
-    // ждём пока fetchUser завершится и isAuth станет true
-    await page.waitForFunction(() =>
-      !document.querySelector('header')?.textContent?.includes('Личный кабинет') ||
-      document.querySelector('header')?.textContent?.includes('Test User')
-    );
+    await page.waitForSelector('[data-testid="app"]');
+    await page.waitForSelector('[data-testid="ingredient-item"]');
   });
 
   test.afterEach(async ({ page }) => {

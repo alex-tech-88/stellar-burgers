@@ -6,7 +6,7 @@
       {
         "request": {
           "method": "GET",
-          "url": "https://norma.nomoreparties.space/api/ingredients",
+          "url": "https://norma.education-services.ru/api/ingredients",
           "headers": [],
           "queryString": [],
           "cookies": [],
@@ -32,7 +32,7 @@
       {
         "request": {
           "method": "GET",
-          "url": "https://norma.nomoreparties.space/api/auth/user",
+          "url": "https://norma.education-services.ru/api/auth/user",
           "headers": [],
           "queryString": [],
           "cookies": [],
@@ -58,7 +58,7 @@
       {
         "request": {
           "method": "POST",
-          "url": "https://norma.nomoreparties.space/api/auth/token",
+          "url": "https://norma.education-services.ru/api/auth/token",
           "headers": [],
           "queryString": [],
           "cookies": [],
@@ -84,7 +84,7 @@
       {
         "request": {
           "method": "POST",
-          "url": "https://norma.nomoreparties.space/api/orders",
+          "url": "https://norma.education-services.ru/api/orders",
           "headers": [],
           "queryString": [],
           "cookies": [],

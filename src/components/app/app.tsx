@@ -62,7 +62,7 @@ const App = () => {
   if (!isAuthChecked) return null;
 
   return (
-    <div className={styles.app}>
+    <div className={styles.app} data-testid={'app'}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
