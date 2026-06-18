@@ -16,9 +16,7 @@
         "response": {
           "status": 200,
           "statusText": "OK",
-          "headers": [
-            { "name": "Content-Type", "value": "application/json" }
-          ],
+          "headers": [{ "name": "Content-Type", "value": "application/json" }],
           "cookies": [],
           "content": {
             "mimeType": "application/json",
@@ -44,13 +42,37 @@
         "response": {
           "status": 200,
           "statusText": "OK",
-          "headers": [
-            { "name": "Content-Type", "value": "application/json" }
-          ],
+          "headers": [{ "name": "Content-Type", "value": "application/json" }],
           "cookies": [],
           "content": {
             "mimeType": "application/json",
             "text": "{\"success\":true,\"user\":{\"email\":\"test@test.com\",\"name\":\"Test User\"}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": -1
+        },
+        "time": 100,
+        "timings": { "send": 0, "wait": 100, "receive": 0 }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "url": "https://norma.nomoreparties.space/api/auth/token",
+          "headers": [],
+          "queryString": [],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": -1
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "headers": [{ "name": "Content-Type", "value": "application/json" }],
+          "cookies": [],
+          "content": {
+            "mimeType": "application/json",
+            "text": "{\"success\":true,\"accessToken\":\"Bearer fake-access-token\",\"refreshToken\":\"fake-refresh-token\"}"
           },
           "redirectURL": "",
           "headersSize": -1,
@@ -72,9 +94,7 @@
         "response": {
           "status": 200,
           "statusText": "OK",
-          "headers": [
-            { "name": "Content-Type", "value": "application/json" }
-          ],
+          "headers": [{ "name": "Content-Type", "value": "application/json" }],
           "cookies": [],
           "content": {
             "mimeType": "application/json",
